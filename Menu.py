@@ -60,6 +60,7 @@ def parseOptions(argv):
                 sys.exit()
             elif opt in ("-m", "--module"):
                 triggerModule(opts, arg)
+                break
             elif opt in ("-w", "--write"):
                 print ("List will extracted from "+arg)
                 sys.exit()
