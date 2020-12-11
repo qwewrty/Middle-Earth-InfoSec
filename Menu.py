@@ -20,10 +20,12 @@ functionDict = {
     "3": netcat.connect,
     "4": netcat.listen
     # "fast-scanner": nmap.nmap
+    #"5": Mithrandir.protectFrodo
 }
 
 moduleDict = {
     "smaug": netcat.triggerModule
+    #"mithrandir": Mithrandir.triggerModule
 }
 
 toolList = """\n1. Slow Scanner
@@ -32,6 +34,7 @@ toolList = """\n1. Slow Scanner
 4. Smaug Listener
 5. NSLookup(in dev)
 6. Password Hash cracker(in dev)"""
+#7. Mithrandir 
 
 def defaultExecution():
     tool = input(toolList+"\nWhat do you want to use: ")
