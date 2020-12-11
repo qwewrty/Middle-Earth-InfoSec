@@ -6,9 +6,10 @@ Welcome human, this is a human readable manual for using the middle-earth InfoSe
 The following weapons are available for the adventure:
 1. The eye of Sauron - nmap port scanner
 2. Gandalf the Grey - Port scanner which isn't foreign
-3. smaug - netcat written in python
-4. Password cracker (In the forge)
-5. elrond - nslookup (In the forge) - Used to help locate ~~winterfell~~ mordor on the map of middle earth without the help of smeagle.(Alright, we might have employed smeagle..)  
+3. Smaug - netcat written in python
+4. Elrond - nslookup - Used to help locate ~~winterfell~~ mordor on the map of middle earth 
+without the help of smeagle.(Alright, we might have employed smeagle..)  
+5. Password cracker (In the forge)
 .  
 .  
 .  

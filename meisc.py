@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import getopt, sys, PortScanner, netcat #, FastScanner
+import getopt, sys, PortScanner, netcat, nslookup #, FastScanner
 
 def usage():
     print ("\nMiddle-Earth-InfoSec")
@@ -19,14 +19,15 @@ functionDict = {
     "1": PortScanner.scan,
     # "2": FastScanner.scan, # This is a very powerful module if extended to utilize its capablities.
     "3": netcat.connect,
-    "4": netcat.listen
-    # "fast-scanner": nmap.nmap
-    #"5": Mithrandir.protectFrodo
+    "4": netcat.listen,
+    "5": nslookup.nslookup
+    #"6": Mithrandir.protectFrodo
 }
 
 moduleDict = {
     "galadriel": PortScanner.triggerModule,
-    "smaug": netcat.triggerModule
+    "smaug": netcat.triggerModule,
+    "elrond": nslookup.triggerModule
     #"mithrandir": Mithrandir.triggerModule
 }
 
@@ -34,7 +35,7 @@ toolList = """\n1. Galadriel - Port scanner which isn't foreign?
 2. The eye of Sauron - nmap port scanner
 3. Smaug Connector - netcat connector
 4. Smaug Listener - netcat listener
-5. Elrond - NSLookup(in the forge)
+5. Elrond - NSLookup
 6. Password Hash cracker(in the forge)"""
 #7. Mithrandir 
 
