@@ -2,20 +2,21 @@
 
 import sys,socket
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcpSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def __scanPorts__(host, ports, timeout):
-    s.settimeout(timeout)
+def __scanTcpPorts__(host, ports, timeout):
+    tcpSocket.settimeout(timeout)
+    print("TCP ports:")
     for port in ports:
-        err = s.connect_ex((host, int(port)))
+        err = tcpSocket.connect_ex((host, int(port)))
         if err:
             print("The port {} is closed : {}".format(port, err))
         else:
             print("The port {} is open!".format(port))
 
-def scan(argv=[]):
-    host = socket.gethostbyname(input("Enter the host to scan: "))
-    ports = input("Enter the ports to scan: ")
+def scan(hostToScan="", portsToScan=""):
+    host = socket.gethostbyname(hostToScan if hostToScan!="" else input("Enter the host to scan: "))
+    ports = portsToScan if portsToScan!="" else input("Enter the ports to scan: ")
 
     print("Scanning " + host)
     arrays = ports.split(",")
@@ -29,6 +30,15 @@ def scan(argv=[]):
             portArray.append(arr)
 
     timeout = 5
-    __scanPorts__(host, portArray, timeout)
+    __scanTcpPorts__(host, portArray, timeout)
 
+def triggerModule(opts):
+    host=""
+    ports=""
+    for opt, arg in opts:
+        if opt in ("-p", "--port"):
+            ports=arg
+        elif opt in ('-H', '--host'):
+            host=arg
+    scan(host, ports)
 # scan()
