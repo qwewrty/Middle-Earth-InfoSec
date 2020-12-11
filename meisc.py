@@ -4,7 +4,8 @@ import getopt, sys, PortScanner, netcat #, FastScanner
 
 def usage():
     print ("\nMiddle-Earth-InfoSec")
-    print ("Usage: middle-earth <options>\n")
+    print ("Usage: python3 meis.py\n")
+    print ("Module Usage: python3 meis.py -m <module_name> <options>\n")
     print ("Options:")
     print ("-h                                  Print this help message.")
     print ("-m <module>, --module=<module>      Trigger the module specified directly instead of showing the menu")
