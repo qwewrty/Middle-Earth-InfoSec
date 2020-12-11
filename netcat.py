@@ -2,14 +2,6 @@
 
 import sys, socket, threading, subprocess
 
-# def setNonBlocking(fd):
-#     """
-#     Set the file description of the given file descriptor to non-blocking.
-#     """
-#     flags = fcntl.fcntl(fd, fcntl.F_GETFL)
-#     flags = flags | os.O_NONBLOCK
-#     fcntl.fcntl(fd, fcntl.F_SETFL, flags)
-
 # A thread which writes the incomming traffic onto stdout.
 class writingThread (threading.Thread):
     def __init__(self, sock):
@@ -43,10 +35,6 @@ def connect(hostToConnect='', portToConnect=-1, command=None):
     proc = None
 
     print("Connecting to " + host + ":"+str(port))
-    # Does not work
-    # if file!=None:
-    #     sys.stdout = file
-    #     sys.stdin = file
 
     if command!=None:
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, bufsize=1, universal_newlines=True)
@@ -55,6 +43,7 @@ def connect(hostToConnect='', portToConnect=-1, command=None):
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     socket.timeout(5)
+
     # Connect to the host and port provided
     connected = s.connect_ex((host, port))
     if connected == 0:
@@ -97,7 +86,7 @@ def listen(portToListen=-1, command=None):
 
     # Bind and start lisening on port
     serverSocket.bind((host, port))
-    serverSocket.listen(3)
+    serverSocket.listen(1)
 
     # Startup the subprocess command if provided
     if command!=None:

@@ -4,8 +4,8 @@ import getopt, sys, PortScanner, netcat #, FastScanner
 
 def usage():
     print ("\nMiddle-Earth-InfoSec")
-    print ("Usage: python3 meis.py\n")
-    print ("Module Usage: python3 meis.py -m <module_name> <options>\n")
+    print ("Usage: python3 meisc.py\n")
+    print ("Module Usage: python3 meisc.py -m <module_name> <options>\n")
     print ("Options:")
     print ("-h                                  Print this help message.")
     print ("-m <module>, --module=<module>      Trigger the module specified directly instead of showing the menu")
@@ -17,7 +17,7 @@ def usage():
 
 functionDict = {
     "1": PortScanner.scan,
-    # "2": FastScanner.scan,
+    # "2": FastScanner.scan, # This is a very powerful module if extended to utilize its capablities.
     "3": netcat.connect,
     "4": netcat.listen
     # "fast-scanner": nmap.nmap
@@ -25,23 +25,32 @@ functionDict = {
 }
 
 moduleDict = {
+    "galadriel": PortScanner.triggerModule,
     "smaug": netcat.triggerModule
     #"mithrandir": Mithrandir.triggerModule
 }
 
-toolList = """\n1. Slow Scanner
-2. Fast Scanner
-3. Smaug Connector
-4. Smaug Listener
-5. NSLookup(in dev)
-6. Password Hash cracker(in dev)"""
+toolList = """\n1. Galadriel - Port scanner which isn't foreign?
+2. The eye of Sauron - nmap port scanner
+3. Smaug Connector - netcat connector
+4. Smaug Listener - netcat listener
+5. Elrond - NSLookup(in the forge)
+6. Password Hash cracker(in the forge)"""
 #7. Mithrandir 
 
 def defaultExecution():
-    tool = input(toolList+"\nWhat do you want to use: ")
-    toCall = functionDict.get(tool)
-    if toCall:
-        toCall()
+    try:
+        tool = input(toolList+"\nWhat do you want to use: ")
+        toCall = functionDict.get(tool)
+        if toCall:
+            toCall()
+        else:
+            print("Sorry the sword is broken and is unavailabe at the moment.")
+            sys.exit()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        sys.exit()
 
 def triggerModule(opts, selection):
     module = moduleDict.get(selection)
@@ -65,9 +74,6 @@ def parseOptions(argv):
             elif opt in ("-m", "--module"):
                 triggerModule(opts, arg)
                 break
-            elif opt in ("-w", "--write"):
-                print ("List will extracted from "+arg)
-                sys.exit()
             else:
                 usage()
     except getopt.GetoptError:           
