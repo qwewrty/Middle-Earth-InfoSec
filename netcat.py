@@ -10,6 +10,7 @@ import sys, socket, threading, subprocess
 #     flags = flags | os.O_NONBLOCK
 #     fcntl.fcntl(fd, fcntl.F_SETFL, flags)
 
+# A thread which writes the incomming traffic onto stdout.
 class writingThread (threading.Thread):
     def __init__(self, sock):
         threading.Thread.__init__(self)
@@ -27,19 +28,14 @@ class writingThread (threading.Thread):
     
     def readAll(self):
         # print("Ready to read:")
-        # buffer=b''
         while self._isRunning:
             data = self.sock.recv(1)
-            # buffer += data
-            # if b'\n' in buffer:
-            #     sys.stdout.write(buffer.decode('utf-8'))
-                # buffer=b''
             if not data:
                 break
             sys.stdout.write(data.decode('utf-8'))
-        # sys.stdout.write(buffer.decode('utf-8'))
+            sys.stdout.flush()
         
-
+# Connector
 def connect(hostToConnect='', portToConnect=-1, command=None):
     # Get host ip and port to connect to
     host = socket.gethostbyname(hostToConnect if hostToConnect != '' else input("Enter the host to connect to: "))
@@ -86,6 +82,8 @@ def connect(hostToConnect='', portToConnect=-1, command=None):
     except Exception as err:
         sys.stderr.write("oops: "+str(err))
 
+
+# Listener
 def listen(portToListen=-1, command=None):
     # Initialize listener on localhost
     serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -110,6 +108,7 @@ def listen(portToListen=-1, command=None):
     # Continue once we have the connection
     clientSocket, address = serverSocket.accept()
     sys.stdout.write("Connected to "+ str(address) + "\n")
+    sys.stdout.flush()
 
     # Start up the listener thread to print received packets onto stdout.
     opThread = writingThread(clientSocket)
@@ -145,14 +144,15 @@ def triggerModule(opts):
             isListener = True
         elif opt in ("-p", "--port"):
             port = int(arg)
-        elif opt in ("-t", "--host"):
+        elif opt in ("-H", "--host"):
             host = arg
         elif opt in ("-c", "--command"):
-            command = [arg.split(" ")]
+            command = arg.split(" ")
     if isListener:
         listen(port, command)
     else:
         connect(host, port, command)
+
 # connect("localhost", 9876, ["nc localhost 9000"])
 # listen([])
     
