@@ -16,9 +16,10 @@ And my axe.
 
 ### Installation and usage
 Inorder to run this project just install python3, download this repo and run 
-`python3 Menu.py`
+> `python3 Menu.py`
+
 If you want to run a specific module directly like smaug you can do so using the -m argument as shown below.
-`python3 Menu.py -m smaug -lp 7654`
+> `python3 Menu.py -m smaug -lp 7654`
 
 On Linux Systems you can just run as `./Menu.py`
 
