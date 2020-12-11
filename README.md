@@ -5,7 +5,7 @@ This is a human made ring of power to gain more information on other army's inve
 Welcome human, this is a human readable manual for using the middle-earth InfoSec tool. 
 The following weapons are available for the adventure:
 1. The eye of Sauron - nmap port scanner
-2. Gandalf the Grey - Port scanner which isn't foreign
+2. Galadriel - Port scanner which isn't foreign
 3. Smaug - netcat written in python
 4. Elrond - nslookup - Used to help locate ~~winterfell~~ mordor on the map of middle earth 
 without the help of smeagle.(Alright, we might have employed smeagle..)  
